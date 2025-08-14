@@ -19,7 +19,7 @@ sed -i 's/$UUID/'$UUID'/g' config.json
 
 # 4. create startup.sh
 wget https://raw.githubusercontent.com/vevc/one-node/refs/heads/main/google-idx/startup.sh
-sed -i 's/$PWD/'$PWD'/g' startup.sh
+sed -i 's#$PWD#'$PWD'#g' startup.sh
 chmod +x startup.sh
 
 # 5. start Xray
