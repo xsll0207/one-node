@@ -22,7 +22,7 @@
         "xhttpSettings": {
           "host": "",
           "mode": "auto",
-          "path": "/?ed=2560"
+          "path": "/"
         }
       }
     }

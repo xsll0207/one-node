@@ -5,7 +5,7 @@
   "inbounds": [
     {
       "listen": null,
-      "port": 2025,
+      "port": 8080,
       "protocol": "vless",
       "settings": {
         "decryption": "none",
@@ -22,7 +22,7 @@
         "xhttpSettings": {
           "host": "",
           "mode": "auto",
-          "path": "/?ed=2560"
+          "path": "/"
         }
       }
     }
