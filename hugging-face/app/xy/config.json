@@ -1,0 +1,53 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": null,
+      "port": 7860,
+      "protocol": "vless",
+      "settings": {
+        "decryption": "none",
+        "clients": [
+          {
+            "email": "hf-xhttp",
+            "flow": "",
+            "id": "$UUID"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "host": "",
+          "mode": "auto",
+          "path": "/"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "domain": [
+          "v.com"
+        ],
+        "outboundTag": "force-to-ip"
+      }
+    ]
+  },
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    },
+    {
+      "tag": "force-to-ip",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "127.0.0.1:0"
+      }
+    }
+  ]
+}
