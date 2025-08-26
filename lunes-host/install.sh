@@ -12,7 +12,7 @@ mkdir -p /home/container/xy
 cd /home/container/xy
 curl -sSL -o Xray-linux-64.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
 unzip Xray-linux-64.zip
-rm -f Xray-linux-64.zip
+rm Xray-linux-64.zip
 mv xray xy
 curl -sSL -o config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/xray-config.json
 sed -i "s/10008/$PORT/g" config.json
@@ -43,3 +43,5 @@ echo "------------------------------------------------------------"
 echo "$vlessUrl"
 echo "$hy2Url"
 echo "============================================================"
+
+tail -f /dev/null
