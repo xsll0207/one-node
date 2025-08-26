@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-DOMAIN="${DOMAIN:-node68.lunes.host}"
-PORT="${PORT:-10008}"
-UUID="${UUID:-2584b733-9095-4bec-a7d5-62b473540f7a}"
-HY2_PASSWORD="${HY2_PASSWORD:-vevc.HY2.Password}"
+DOMAIN=node68.lunes.host
+PORT=10008
+UUID=2584b733-9095-4bec-a7d5-62b473540f7a
+HY2_PASSWORD='vevc.HY2.Password'
 
 curl -sSL -o app.js https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/app.js
 curl -sSL -o package.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/package.json
