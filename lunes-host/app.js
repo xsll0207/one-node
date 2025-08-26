@@ -5,18 +5,18 @@ const apps = [
   {
     name: "xy",
     binaryPath: "/home/container/xy/xy",
-    configPath: "/home/container/h2/config.json"
+    args: ["-c", "/home/container/h2/config.json"]
   },
   {
     name: "h2",
     binaryPath: "/home/container/h2/h2",
-    configPath: "/home/container/h2/config.yaml"
+    args: ["server", "-c", "/home/container/h2/config.yaml"]
   }
 ];
 
 // Run binary with keep-alive
 function runProcess(app) {
-  const child = spawn(app.binaryPath, ["-c", app.configPath], { stdio: "inherit" });
+  const child = spawn(app.binaryPath, app.args, { stdio: "inherit" });
 
   child.on("exit", (code) => {
     console.log(`[EXIT] ${app.name} exited with code: ${code}`);

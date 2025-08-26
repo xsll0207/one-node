@@ -24,7 +24,7 @@ sed -i "s/YOUR_PRIVATE_KEY/$privateKey/g" config.json
 shortId=$(openssl rand -hex 4)
 sed -i "s/YOUR_SHORT_ID/$shortId/g" config.json
 vlessUrl="vless://$UUID@$DOMAIN:$PORT?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.cloudflare.com&fp=chrome&pbk=$publicKey&sid=$shortId&spx=%2F&type=tcp&headerType=none#lunes-reality"
-echo vlessUrl > /home/container/node.txt
+echo $vlessUrl > /home/container/node.txt
 
 mkdir -p /home/container/h2
 cd /home/container/h2
@@ -35,7 +35,7 @@ chmod +x h2
 sed -i "s/10008/$PORT/g" config.yaml
 sed -i "s/HY2_PASSWORD/$HY2_PASSWORD/g" config.yaml
 hy2Url="hysteria2://$HY2_PASSWORD@$DOMAIN:$PORT?insecure=1#lunes-hy2"
-echo hy2Url >> /home/container/node.txt
+echo $hy2Url >> /home/container/node.txt
 
 echo "============================================================"
 echo "🚀 VLESS Reality & HY2 Node Info"

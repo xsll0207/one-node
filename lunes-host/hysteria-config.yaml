@@ -6,4 +6,4 @@ tls:
 
 auth:
   type: password
-  password: HY2_PASSWORD
+  password: 'HY2_PASSWORD'
