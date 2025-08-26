@@ -30,7 +30,7 @@ mkdir -p /home/container/h2
 cd /home/container/h2
 curl -sSL -o h2 https://github.com/apernet/hysteria/releases/latest/download/hysteria-linux-amd64
 curl -sSL -o config.yaml https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/hysteria-config.yaml
-openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout key.pem -out cert.pem -subj "/CN=v.com"
+openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout key.pem -out cert.pem -subj "/CN=$DOMAIN"
 chmod +x h2
 sed -i "s/10008/$PORT/g" config.yaml
 sed -i "s/HY2_PASSWORD/$HY2_PASSWORD/g" config.yaml
