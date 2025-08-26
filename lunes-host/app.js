@@ -5,7 +5,7 @@ const apps = [
   {
     name: "xy",
     binaryPath: "/home/container/xy/xy",
-    args: ["-c", "/home/container/h2/config.json"]
+    args: ["-c", "/home/container/xy/config.json"]
   },
   {
     name: "h2",
