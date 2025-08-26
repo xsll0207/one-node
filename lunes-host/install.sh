@@ -5,14 +5,15 @@ PORT="${PORT:-10008}"
 UUID="${UUID:-2584b733-9095-4bec-a7d5-62b473540f7a}"
 HY2_PASSWORD="${HY2_PASSWORD:-vevc.HY2.Password}"
 
-curl -sSL -o config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/app.js
-curl -sSL -o config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/package.json
+curl -sSL -o app.js https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/app.js
+curl -sSL -o package.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/package.json
 
 mkdir -p /home/container/xy
 cd /home/container/xy
 curl -sSL -o Xray-linux-64.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
 unzip Xray-linux-64.zip
 rm -f Xray-linux-64.zip
+mv xray xy
 curl -sSL -o config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/dev/lunes-host/xray-config.json
 sed -i "s/10008/$PORT/g" config.json
 sed -i "s/YOUR_UUID/$UUID/g" config.json
