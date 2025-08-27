@@ -9,7 +9,9 @@ RUN apt-get update; \
     rm -f Xray-linux-64.zip; \
     mv xray xy; \
     wget -O td https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64; \
-    chmod +x td
+    chmod +x td; \
+    wget -O supercronic https://github.com/aptible/supercronic/releases/latest/download/supercronic-linux-amd64; \
+    chmod +x supercronic
 
 ############################################################
 
@@ -26,16 +28,18 @@ COPY app /app
 
 RUN export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
-    apt-get install -y tzdata openssh-server curl ca-certificates wget vim net-tools supervisor cron unzip iputils-ping telnet git iproute2 --no-install-recommends; \
+    apt-get install -y tzdata openssh-server curl ca-certificates wget vim net-tools supervisor unzip iputils-ping telnet git iproute2 --no-install-recommends; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/*; \
     chmod +x /entrypoint.sh; \
-    chmod +x /app/keepalive.sh; \
+    chmod -R 777 /app; \
+    useradd -u 1000 -g 0 -m -s /bin/bash appuser; \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime; \
     echo $TZ > /etc/timezone
 
 COPY --from=builder /app/xy /usr/local/bin/xy
 COPY --from=builder /app/td /usr/local/bin/td
+COPY --from=builder /app/supercronic /usr/local/bin/supercronic
 
 EXPOSE 7860
 
