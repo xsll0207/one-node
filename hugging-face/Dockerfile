@@ -33,7 +33,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     rm -rf /var/lib/apt/lists/*; \
     chmod +x /entrypoint.sh; \
     chmod -R 777 /app; \
-    useradd -u 1000 -g 0 -m -s /bin/bash appuser; \
+    useradd -u 1000 -g 0 -m -s /bin/bash user; \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime; \
     echo $TZ > /etc/timezone
 

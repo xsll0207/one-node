@@ -19,7 +19,7 @@
           {
             "email": "hf-xhttp",
             "flow": "",
-            "id": "$UUID"
+            "id": "UUID"
           }
         ]
       },
