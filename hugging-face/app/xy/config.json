@@ -2,6 +2,12 @@
   "log": {
     "loglevel": "warning"
   },
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "8.8.8.8"
+    ]
+  },
   "inbounds": [
     {
       "listen": null,
@@ -24,6 +30,13 @@
           "mode": "auto",
           "path": "/"
         }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     }
   ],
@@ -40,7 +53,10 @@
   },
   "outbounds": [
     {
-      "protocol": "freedom"
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy":"UseIP"
+      }
     },
     {
       "tag": "force-to-ip",
