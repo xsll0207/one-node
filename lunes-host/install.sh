@@ -10,7 +10,7 @@ curl -sSL -o package.json https://raw.githubusercontent.com/vevc/one-node/refs/h
 
 mkdir -p /home/container/xy
 cd /home/container/xy
-curl -sSL -o Xray-linux-64.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+curl -sSL -o Xray-linux-64.zip https://github.com/XTLS/Xray-core/releases/download/v25.8.3/Xray-linux-64.zip
 unzip Xray-linux-64.zip
 rm Xray-linux-64.zip
 mv xray xy
