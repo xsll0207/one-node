@@ -10,7 +10,8 @@
         "clients": [
           {
             "id": "YOUR_UUID",
-            "flow": "xtls-rprx-vision"
+            "flow": "xtls-rprx-vision",
+            "email": "lunes-reality"
           }
         ],
         "decryption": "none"
