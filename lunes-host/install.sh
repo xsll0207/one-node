@@ -34,7 +34,8 @@ openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout key.pem -out cert.p
 chmod +x h2
 sed -i "s/10008/$PORT/g" config.yaml
 sed -i "s/HY2_PASSWORD/$HY2_PASSWORD/g" config.yaml
-hy2Url="hysteria2://$HY2_PASSWORD@$DOMAIN:$PORT?insecure=1#lunes-hy2"
+encodedHy2Pwd=$(node -e "console.log(encodeURIComponent(process.argv[1]))" "$HY2_PASSWORD")
+hy2Url="hysteria2://$encodedHy2Pwd@$DOMAIN:$PORT?insecure=1#lunes-hy2"
 echo $hy2Url >> /home/container/node.txt
 
 echo "============================================================"
