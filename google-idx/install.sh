@@ -3,29 +3,61 @@
 PORT="${PORT:-8080}"
 UUID="${UUID:-2584b733-9095-4bec-a7d5-62b473540f7a}"
 
-# 1. init directory
-mkdir -p app/xray
-cd app/xray
+# 1. 初始化目录
+mkdir -p app/sing-box
+cd app/sing-box
 
-# 2. download and extract Xray
-wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-unzip Xray-linux-64.zip
-rm -f Xray-linux-64.zip
+# 2. 下载并解压 sing-box
+wget https://github.com/SagerNet/sing-box/releases/latest/download/sing-box-linux-amd64.tar.gz
+tar -xzf sing-box-linux-amd64.tar.gz
+mv sing-box-*/sing-box .
+rm -rf sing-box-linux-amd64.tar.gz sing-box-*
 
-# 3. add config file
-wget -O config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/main/google-idx/xray-config-template.json
-sed -i 's/$PORT/'$PORT'/g' config.json
-sed -i 's/$UUID/'$UUID'/g' config.json
+# 3. 添加配置文件
+cat << EOF > config.json
+{
+  "log": {"level": "info"},
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": $PORT,
+      "users": [
+        {
+          "uuid": "$UUID",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "example.domain.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "YOUR_PUBLIC_KEY",
+          "short_id": "YOUR_SHORT_ID"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct"
+    }
+  ]
+}
+EOF
 
-# 4. create startup.sh
-wget https://raw.githubusercontent.com/vevc/one-node/refs/heads/main/google-idx/startup.sh
-sed -i 's#$PWD#'$PWD'#g' startup.sh
+# 4. 创建启动脚本
+cat << EOF > startup.sh
+#!/usr/bin/env sh
+$PWD/sing-box run -c $PWD/config.json &
+EOF
 chmod +x startup.sh
 
-# 5. start Xray
+# 5. 启动 sing-box
 $PWD/startup.sh
 
-# 6. print node info
+# 6. 输出节点信息
 echo '---------------------------------------------------------------'
-echo "vless://$UUID@example.domain.com:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp"
+echo "vless://$UUID@example.domain.com:$PORT?encryption=none&security=reality&flow=xtls-rprx-vision&sni=example.domain.com&fp=chrome&type=tcp#idx-vless"
 echo '---------------------------------------------------------------'
